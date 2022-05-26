@@ -7,7 +7,7 @@ struct node
 {   
 void* data;
 struct node *next;
-}*node;
+}node;
 
  struct queue
 {

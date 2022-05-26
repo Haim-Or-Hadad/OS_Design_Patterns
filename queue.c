@@ -30,7 +30,7 @@ void destroyQ(struct queue *q)
 void enQ(struct queue *q,void *data)
 {
     pthread_mutex_lock(&q->mutex);
-    struct node * new_node = (struct node*)malloc(sizeof(*node));
+    struct node *new_node = (struct node*)malloc(sizeof(node));
     new_node->data = data;
     if (q->size == 0 ){
         q->head = new_node;
@@ -66,17 +66,17 @@ struct queue *q)
 }
 
 
-int main(){
-  struct queue *q = createQ();
-  int c=3;
-  printf("%ld",q->size);
-  enQ(q,&c);
-  enQ(q,&c);
-  enQ(q,&c);
-  enQ(q,&c);
-  printf("%ld",q->size);
-  deQ(q);
-  printf("%ld",q->size);
-  destroyQ(q);
-return 0;
-}
+// int main(){
+//   struct queue *q = createQ();
+//   int c=3;
+//   printf("%ld",q->size);
+//   enQ(q,&c);
+//   enQ(q,&c);
+//   enQ(q,&c);
+//   enQ(q,&c);
+//   printf("%ld",q->size);
+//   deQ(q);
+//   printf("%ld",q->size);
+//   destroyQ(q);
+// return 0;
+// }
