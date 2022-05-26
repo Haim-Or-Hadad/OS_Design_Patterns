@@ -1,14 +1,4 @@
 
-#include <iostream>
-using namespace std;
-
-struct node
-{   
-void *data;
-node *next;
-};
-
-
 #include <stdbool.h>
 #include <pthread.h>
 
