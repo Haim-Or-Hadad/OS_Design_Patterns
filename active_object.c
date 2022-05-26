@@ -1,7 +1,39 @@
 #include "active_object.h"
 #include <pthread.h>
+#include <stdio.h>
+#include <ctype.h>
 
 
+void Caesar_Cipher(char* word){
+    for (size_t i = 0; i < strlen(word); i++)
+    {
+        if (word[i] == 'Z')
+        {
+            word[i] = 'A';
+        }
+        else if (word[i] =='z')
+        {
+            word[i] = 'a';
+        }
+        else{
+            word[i] += 1;
+        }
+    }
+    
+}
+
+void Change_letter_case(char* word){
+    for (size_t i = 0; i < strlen(word); i++)
+    {
+        if ((word[i] >= 65) && (word[i] <= 90)){
+            word[i]=tolower(word[i]);
+        }
+        else{
+            word[i]=toupper(word[i]);
+        }
+    }
+    
+}
 
 /*********create new active object******/
 AO * newAO(struct queue* q,  void* func_1, void* func_2)
