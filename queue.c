@@ -6,11 +6,11 @@
 /*******create of queue**********/
 struct queue *createQ()
 {
-queue * q = (struct queue*)malloc(sizeof(struct queue));
+struct queue * q = (struct queue*)malloc(sizeof(struct queue));
 pthread_mutex_init(&q->mutex, NULL);
 pthread_cond_init(&q->cond, NULL);
-q->head = NULL;
-q->tail = NULL;
+q->head = ((void*)0);
+q->tail = ((void*)0);
 return q;
 }
 
@@ -30,7 +30,7 @@ void destroyQ(struct queue *q)
 void enQ(struct queue *q,void *data)
 {
     pthread_mutex_lock(&q->mutex);
-    node *new_node = (struct node*)malloc(sizeof(node*));
+    struct node * new_node = (struct node*)malloc(sizeof(*node));
     new_node->data = data;
     if (q->size == 0 ){
         q->head = new_node;
@@ -48,7 +48,8 @@ void enQ(struct queue *q,void *data)
 }
 
 /*******delete element from the queue**********/
-void* deQ(struct queue *q)
+void* deQ( 
+struct queue *q)
 {
     pthread_mutex_lock(&q->mutex);
     while(q->size == 0)
@@ -56,7 +57,7 @@ void* deQ(struct queue *q)
     pthread_cond_wait(&q->cond, &q->mutex);
     }
     void * en_q = q->head->data;
-    node *temp= q->head;
+    struct node *temp= q->head;
     q->head = q->head->next;
     free(temp);
     q->size--;
@@ -65,17 +66,17 @@ void* deQ(struct queue *q)
 }
 
 
-// int main(){
-//   queue *q = createQ();
-//   int c=3;
-//   cout << q->size << endl;
-//   enQ(q,&c);
-//   enQ(q,&c);
-//   enQ(q,&c);
-//   enQ(q,&c);
-//   cout << q->size << endl;
-//   cout << deQ(q) << endl;
-//   cout << q->size << endl;
-//   destroyQ(q);
-// return 0;
-// }
+int main(){
+  struct queue *q = createQ();
+  int c=3;
+  printf("%ld",q->size);
+  enQ(q,&c);
+  enQ(q,&c);
+  enQ(q,&c);
+  enQ(q,&c);
+  printf("%ld",q->size);
+  deQ(q);
+  printf("%ld",q->size);
+  destroyQ(q);
+return 0;
+}
