@@ -7,35 +7,41 @@
 
 typedef struct queue queue;
 
-void Caesar_Cipher(char* word){
-    for (size_t i = 0; i < strlen(word); i++)
+void* Caesar_Cipher(void* word){
+    // printf("%ld",sizeof(word));
+    char* curr_char=(char*)word;
+    char* new_word=malloc(sizeof((char*)word));
+    for (size_t i = 0; i < strlen(curr_char); i++)
     {
-        if (word[i] == 'Z')
+        if (curr_char[i] == 'Z')
         {
-            word[i] = 'A';
+            new_word[i] = 'A';
         }
-        else if (word[i] =='z')
+        else if (curr_char[i] =='z')
         {
-            word[i] = 'a';
+            new_word[i] = 'a';
         }
         else{
-            word[i] += 1;
+            new_word[i] += curr_char[i]+1;
         }
     }
-    
+
+    return new_word;
 }
 
-void Change_letter_case(char* word){
+void* Change_letter_case(void* word){
+    char* curr_char=(char*)word;
+    char* new_word=malloc(sizeof((char*)word));
     for (size_t i = 0; i < strlen(word); i++)
     {
-        if ((word[i] >= 65) && (word[i] <= 90)){
-            word[i]=tolower(word[i]);
+        if ((curr_char[i] >= 65) && (curr_char[i] <= 90)){
+            new_word[i]=tolower(curr_char[i]);
         }
         else{
-            word[i]=toupper(word[i]);
+            new_word[i]=toupper(curr_char[i]);
         }
     }
-    printf("%s\n",word);
+    return new_word;
     
 }
 
@@ -46,18 +52,24 @@ AO* active_object_ = (AO*)malloc(sizeof(AO));
 active_object_->q = q;
 active_object_->function_1 = func_1;
 active_object_->function_2 = func_2;
-//active_object_->thread_ = (pthread_t *)(malloc(sizeof(pthread_t)));
-//pthread_create(active_object_->thread_, NULL, run_AO, (void*)(active_object_));
+active_object_->id = (pthread_t *)(malloc(sizeof(pthread_t)));
+pthread_create(active_object_->id, NULL, run_AO, (void*)(active_object_));
 active_object_->running = 1;
 return active_object_;
 }
 
-void run_AO(AO* ao)
+void* run_AO(void* ao)
 {
-    void* handled_now =ao->function_1(deQ(ao->q));
-    void* next=ao->function_2(handled_now);
-    //free(ao->id);
-    free(ao);
+    AO *new_ao=(AO *) ao;
+     printf("before\n");
+    void* First_result =new_ao->function_1(deQ(new_ao->q));
+    printf("after %s\n", (char*)First_result);
+    char *new_node=(char *) First_result;
+    printf("%s\n",new_node);
+    void* sescond_result=new_ao->function_2(First_result);
+    printf("after2 %s\n", (char*)sescond_result);
+    // free(ao->id);
+    // free(ao);
 }
 
 void destroy(AO* ao)
@@ -72,19 +84,21 @@ free(ao);
 
 int main(int argc, char const *argv[])
 {
-queue* firstQueue;
-queue* secondQueue;
-queue* thirdQueue;
-AO *firstAO;
-AO *secondAO; 
-AO *thirdAO;
+    queue* firstQueue;
+    AO *firstAO;
     firstQueue = createQ();
-    // secondQueue = createQ();
-    // thirdQueue = createQ();
     enQ(firstQueue,"HELLO");
+    //******************************************************* dont work with AO
+    //  struct node* t;
+    //  t->data=deQ(firstQueue);
+    //  printf("%s ",t->data);
+    //  struct node * test1=Caesar_Cipher(t);
+    //  printf("%s ",test1->data);
+    //*******************************************************
     firstAO = newAO(firstQueue, Caesar_Cipher,Change_letter_case);
-    run_AO(firstAO);
-    //destroyAO(firstAO);
-    destroyQ(firstQueue);
+    sleep(14);
+    //run_AO(firstAO);
+    // //destroyAO(firstAO);
+    // destroyQ(firstQueue);
     return 0;
 }
