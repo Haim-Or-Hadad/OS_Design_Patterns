@@ -6,6 +6,7 @@
 struct node
 {   
 void* data;
+int socket_fd;
 struct node *next;
 }node;
 
