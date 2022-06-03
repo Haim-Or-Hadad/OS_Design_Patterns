@@ -48,7 +48,6 @@ void* Client_thread_handler(void *new_fd){
         }
         struct node_data* recv_msg_node=(struct node_data*)malloc(sizeof(struct node_data));
         recv_msg_node->sock=socket;
-        // *(buffer+msg_len) = '\0';
         memcpy(recv_msg_node->data,buffer, sizeof(buffer));
         enQ(Q1,recv_msg_node);
     }
