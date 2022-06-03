@@ -7,7 +7,7 @@ HEADERS=$(wildcard *.hpp)
 all: main1
 
 main1: main1.c
-	$(CC) $(FLAGS) main1.c -o main1 -lpthread
+	$(CC) $(FLAGS) main1.c active_object.c queue.c -o main1 -lpthread
 
 client: client.c
 	$(CC) client.c -o client

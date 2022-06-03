@@ -1,4 +1,4 @@
-
+#pragma once
 #include <stdbool.h>
 #include <pthread.h>
 
@@ -6,11 +6,15 @@
 struct node
 {   
 void* data;
-int socket_fd;
 struct node *next;
 }node;
 
- struct queue
+struct node_data{
+    char data[2048];
+    int sock;
+}node_data;
+
+struct queue
 {
 pthread_cond_t cond; //= PTHREAD_COND_INITIALIZER;
 pthread_mutex_t mutex;// = PTHREAD_MUTEX_INITIALIZER;

@@ -48,8 +48,7 @@ void enQ(struct queue *q,void *data)
 }
 
 /*******delete element from the queue**********/
-void* deQ( 
-struct queue *q)
+void* deQ(struct queue *q)
 {
     pthread_mutex_lock(&q->mutex);
     while(q->size == 0)
