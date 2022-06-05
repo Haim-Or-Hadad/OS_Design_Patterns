@@ -1,7 +1,7 @@
 CC=gcc
 Cpp=g++
 OBJECTS=active_object.o guard.o reactor.o queue.o
-AO=ActiveObject
+
 
 Cpp_HEADERS=$(wildcard *.hpp)
 C_HEADERS=$(wildcard *.h)
@@ -21,18 +21,18 @@ pollclient: PollClient.o
 Pollserver: Reactor.o pollserver.o 
 	$(Cpp) Reactor.o pollserver.o -o Pollserver -lpthread 
 
-main1.o: $(C_HEADERS) $(AO)/main1.c
-	$(CC) -c $(AO)/main1.c -lpthread -fPIC
+main1.o: $(C_HEADERS) main1.c
+	$(CC) -c main1.c -lpthread -fPIC
 
-active_object.o: $(C_HEADERS) $(AO)/active_object.c
-	$(CC) -c $(AO)/active_object.c -lpthread -fPIC
+active_object.o: $(C_HEADERS) active_object.c
+	$(CC) -c active_object.c -lpthread -fPIC
 
-queue.o: $(C_HEADERS) $(AO)/queue.c
-	$(CC) -c $(AO)/queue.c -lpthread -fPIC
+queue.o: $(C_HEADERS) queue.c
+	$(CC) -c queue.c -lpthread -fPIC
 
 
-client.o: $(C_HEADERS) $(AO)/client.c
-	$(CC) -lpthread -fPIC  -c $(AO)/client.c 
+client.o: $(C_HEADERS) client.c
+	$(CC) -lpthread -fPIC  -c client.c 
 
 Reactor.o: $(Cpp_HEADERS) Reactor.cpp
 	$(Cpp) -c Reactor.cpp -lpthread -fPIC
