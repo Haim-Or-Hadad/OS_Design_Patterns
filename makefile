@@ -60,8 +60,5 @@ PollClient.o: PollClient.cpp
 	$(Cpp) -c PollClient.cpp -lpthread -fPIC	
 
 
-# lib.so: $(OBJECTS)
-# 	$(CC) --shared -fPIC -pthread  $(OBJECTS) -o lib.so
-
 clean: 
 	rm -f *.o main1 client  pollclient Pollserver guard singleton  *.so 		
