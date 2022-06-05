@@ -38,10 +38,10 @@ client.o: $(C_HEADERS) client.c
 	$(CC) -lpthread -fPIC  -c client.c 
 
 guard:guard.o
-	$(Cpp) guard.o -o guard
+	$(Cpp) guard.o -o guard -lpthread
 
 guard.o:guard.cpp 
-	$(Cpp)  -c -fPIC  guard.cpp 
+	$(Cpp)  -c -fPIC  guard.cpp -lpthread
 
 singleton:singleton.o
 	$(Cpp) singleton.o -o singleton
