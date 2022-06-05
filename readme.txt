@@ -1,6 +1,8 @@
 
 ***open terminal write: make all***
 
+### the tests includes in the cpp files below! 
+
 ## how to run 1-3:
 1.open 2 termials or more.
 2.  ./main1
