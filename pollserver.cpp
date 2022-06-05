@@ -12,7 +12,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <poll.h>
-#include "Reactor.hpp"
+#include "reactor.hpp"
 
 #define PORT "3490"   // Port we're listening on
 

@@ -1,6 +1,6 @@
 #include <pthread.h>
 #include <iostream>
-#include "Reactor.hpp"
+#include "reactor.hpp"
 
 void* newReactor(){
     Reactor* new_react= (Reactor*)(malloc(sizeof(Reactor)));

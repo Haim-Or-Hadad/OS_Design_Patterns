@@ -34,8 +34,8 @@ queue.o: $(C_HEADERS) queue.c
 client.o: $(C_HEADERS) client.c
 	$(CC) -lpthread -fPIC  -c client.c 
 
-Reactor.o: $(Cpp_HEADERS) Reactor.cpp
-	$(Cpp) -c Reactor.cpp -lpthread -fPIC
+Reactor.o: $(Cpp_HEADERS) reactor.cpp
+	$(Cpp) -c reactor.cpp -lpthread -fPIC
 
 # g++ pollserver.cpp Reactor.cpp -o server -lpthread
 pollserver.o: $(Cpp_HEADERS) pollserver.cpp
